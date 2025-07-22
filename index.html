@@ -1,372 +1,320 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator UPJL</title>
-    <style>
-        :root {
-            --hijau-kemenhut: #008833;
-            --coklat-kemenhut: #997000;
-            --abu-muda: #f7f8f6;
-            --font-size-label: clamp(14px, 2.5vw, 18px);
-            --font-size-input: clamp(14px, 3vw, 18px);
-            --font-size-footer: clamp(9px, 1.5vw, 12px);
-            --font-size-button: clamp(14px, 3vw, 18px);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator UPJL</title>
+  <style>
+    :root {
+      --hijau-kemenhut: #198754;
+      --coklat-kemenhut: #997000;
+      --hijau-dark: #146437;
+    }
+    body {
+      margin: 0;
+      background: #f5faf7;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .main-card {
+      background: #fff;
+      border-radius: 22px;
+      max-width: 440px;
+      margin: 28px auto;
+      box-shadow: 0 0 36px #0001, 0 1.5px 3px #aaa2;
+      overflow: hidden;
+      border: 1px solid #dde6da;
+    }
+    .header {
+      background: var(--hijau-kemenhut);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 18px 24px 15px 24px;
+      gap: 18px;
+      border-radius: 22px 22px 0 0;
+      border-bottom: 4px solid var(--coklat-kemenhut);
+    }
+    .header img {
+      height: 54px;
+      background: #fff;
+      border-radius: 18px;
+      padding: 5px 7px;
+      border: 1px solid #fff5;
+    }
+    .header-txt {
+      flex: 1;
+    }
+    .header-txt .title {
+      font-size: 1.37em;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+    .header-txt .sub {
+      font-size: 1em;
+      font-weight: 500;
+      opacity: .92;
+      letter-spacing: 0.5px;
+    }
 
-.wrapper {
-  margin: 20px auto;
-  padding: 8px;
-  border: 3px solid #997000; /* Warna coklat kemenhut */
-  border-radius: 12px;
-  background-color: #f7f8f6;
-  width: 50vw;            /* ✅ fleksibel mengikuti viewport */
-  max-width: 98%;         /* ✅ hampir penuh tapi masih menyisakan margin */
-  box-sizing: border-box;
-  overflow-x: auto;       /* ✅ jika tabel sangat lebar, tetap bisa scroll horizontal */
-}
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--abu-muda);
-        }
-
-        .header {
-            background-color: var(--hijau-kemenhut);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 24px;
-            max-width: 600px;
-            margin: 0 auto;
-            border-bottom: 5px solid var(--coklat-kemenhut);
-            border-radius: 0 0 8px 8px;
-        }
-
-        .header-left {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .header-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            width: 150px;
-        }
-
-        .header-right .bhpl {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-align: right;
-            width: 100%;
-        }
-
-        .header-right .kemenhut {
-            font-size: 20px;
-            font-weight: bold;
-            text-align: right;
-            width: 100%;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .input-group {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-            align-items: center;
-        }
-
-        .input-group label {
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .input-group input,
-        .input-group select {
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .button-group button {
-            flex: 1;
-            padding: 12px 18px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            background-color: #008833; /* hijau kemenhut */
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-
-        .button-group button:hover {
-            background-color: #006b29;
-        }
-
-        #hasil {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 20px;
-            background: #ffffff;
-            border: 2px solid #198754;
-            border-radius: 8px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #36854d;
-            text-align: center;
-        }
-
-        .footer {
-            max-width: 600px;          /* Sama dengan container utama */
-            margin: 20px auto;         /* Center dan beri jarak vertikal */
-            padding: 0 20px;           /* Padding kiri dan kanan */
-            font-size: var(--font-size-footer);
-            color: #555;
-            text-align: justify;
-            line-height: 1.5;
-            box-sizing: border-box;    /* Padding dihitung dalam lebar */
-        }
-
-        .footer ol {
-            margin-left: 0;
-            padding-left: 20px; /* bisa disesuaikan */
-        }
-
-        @media (max-width: 600px) {
-            .input-group {
-                grid-template-columns: 1fr;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-        }
-    </style>
+    .form-section {
+      padding: 30px 28px 15px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .input-group label {
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: block;
+      color: #135;
+    }
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 11px 10px;
+      border: 1.5px solid #c9e6d3;
+      border-radius: 10px;
+      font-size: 1em;
+      margin-top: 2px;
+      background: #f8faf8;
+      transition: border-color .2s;
+    }
+    .input-group input:focus,
+    .input-group select:focus {
+      border-color: var(--hijau-kemenhut);
+      outline: none;
+      background: #f4fff8;
+    }
+    .button-row {
+      display: flex;
+      gap: 10px;
+      margin: 18px 0 0 0;
+    }
+    .button-row button {
+      flex: 1 1 0;
+      padding: 12px 0;
+      background: linear-gradient(90deg, #23c671 75%, #13883d 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 6px #18875322;
+      transition: background 0.16s;
+    }
+    .button-row button:last-child {
+      background: linear-gradient(90deg, #fafafa 60%, #e7efea 100%);
+      color: var(--hijau-dark);
+      border: 1px solid #cce9da;
+      font-weight: 600;
+    }
+    .button-row button:hover {
+      opacity: 0.93;
+      filter: brightness(0.98);
+    }
+    #hasil {
+      margin: 14px 0 8px 0;
+      font-weight: 700;
+      color: var(--hijau-kemenhut);
+      font-size: 1.22em;
+      border: 2.5px solid #a3dbbd;
+      background: #f5fff8;
+      padding: 13px 0;
+      border-radius: 12px;
+      text-align: center;
+      letter-spacing: 1px;
+      min-height: 24px;
+    }
+    .footer {
+      background: #fff;
+      padding: 14px 32px 20px 32px;
+      color: #444;
+      border-radius: 0 0 22px 22px;
+      font-size: 0.98em;
+    }
+    .footer p {
+      margin: 10px 0 3px 0;
+      font-weight: 600;
+      font-size: 1em;
+    }
+    .footer ol {
+      margin-top: 4px;
+      margin-left: 17px;
+      font-weight: 400;
+      font-size: 0.99em;
+    }
+    .copyright {
+      color: #888;
+      font-size: 0.93em;
+      text-align: center;
+      padding: 10px 0 15px 0;
+      font-weight: 400;
+      opacity: .8;
+    }
+    @media (max-width:520px) {
+      .main-card {
+        max-width: 98vw;
+        padding: 0;
+      }
+      .form-section, .footer {
+        padding: 18px 5vw 12px 5vw;
+      }
+    }
+  </style>
 </head>
 <body>
- <div class="wrapper">
-
+  <div class="main-card">
     <div class="header">
-        <div class="header-left">Kalkulator UPJL</div>
-        <div class="header-right">
-            <div class="bhpl">BPHL 8 Surabaya</div>
-            <div class="kemenhut">KEMENHUT</div>
-        </div>
+      <img src="https://bphl8.netlify.app/logo-kemenhut.png" alt="Logo Kemenhut" />
+      <div class="header-txt">
+        <div class="title">KALKULATOR UPJL</div>
+        <div class="sub">BPHL 8 SURABAYA</div>
+      </div>
     </div>
-
-    <div class="container">
-        
-        <div class="input-group">
-            <label for="usaha">Jenis Usaha:</label>
-            <select id="usaha" onchange="populateSubUsahaDropdown()">
-                <!-- Opsi jenis usaha akan diisi dinamis -->
-            </select>
-        </div>
+    <form autocomplete="off" onsubmit="event.preventDefault();calculateTotal()">
+      <div class="form-section">
 
         <div class="input-group">
-            <label for="subUsaha">Pelaku Usaha:</label>
-            <select id="subUsaha" onchange="updateSatuan()">
-                <!-- Opsi sub usaha akan diisi dinamis -->
-            </select>
+          <label for="usaha">Jenis Usaha:</label>
+          <select id="usaha" onchange="populateSubUsahaDropdown()" required></select>
         </div>
-
         <div class="input-group">
-            <label for="satuan">Satuan:</label>
-            <input type="text" id="satuan" readonly>
+          <label for="subUsaha">Pelaku Usaha:</label>
+          <select id="subUsaha" onchange="updateSatuan()" required></select>
         </div>
-
         <div class="input-group">
-            <label for="hargaDasar">Tarif per Satuan (Rp):</label>
-            <input type="text" id="hargaDasar" placeholder="Masukkan harga dasar/Penghasilan Bruto/Nilai Transaksi" oninput="formatHarga(this)" />
+          <label for="satuan">Satuan:</label>
+          <input type="text" id="satuan" readonly />
         </div>
-
         <div class="input-group">
-            <label for="jumlah">Volume:</label>
-            <input type="number" id="jumlah" placeholder="Masukkan jumlah" />
+          <label for="hargaDasar">Tarif per Satuan (Rp):</label>
+          <input type="text" id="hargaDasar" placeholder="Masukkan harga dasar/Bruto/Transaksi" oninput="formatHarga(this)" required />
+        </div>
+        <div class="input-group">
+          <label for="jumlah">Volume:</label>
+          <input type="number" id="jumlah" placeholder="Masukkan jumlah" min="1" required />
         </div>
 
-        
-        <div class="button-group">
-            <button onclick="calculateTotal()">Hitung & Simpan</button>
-            <button onclick="clearResults()">Bersihkan Hasil</button>
+        <div class="button-row">
+          <button type="submit">Hitung</button>
+          <button type="button" onclick="clearResults()">Bersihkan Hasil</button>
         </div>
-        
-    </div>
-
-    <!-- Kotak hasil -->
-    <div id="hasil"></div>
-
+        <div id="hasil">Total UPJL: -</div>
+      </div>
+    </form>
     <div class="footer">
-          <p><strong>Disclaimer:</strong></p> Total PNBP yang dihasilkan merupakan Hasil Simulasi Perhitungan PNBP
-          <p><strong>Berdasarkan:</strong></p>
-          <ol>
-          <li>Peraturan Pemerintah Nomor 36 Tahun 2024 Tentang Jenis dan Tarif Atas Jenis Penerimaan Negara Bukan Pajak Yang Berlaku Pada Kementerian Lingkungan Hidup Dan Kehutanan</li>
-          <li>Peraturan Menteri Kehutanan Nomor 2 Tahun 2025 Tentang Harga Patokan Hasil Hutan Kayu Dan Hasil Hutan Bukan Kayu Untuk Penghitungan Penerimaan Negara Bukan Pajak</li>
-  </ol>
+      <p>Disclaimer:</p>
+      Total PNBP yang dihasilkan merupakan Hasil Simulasi Perhitungan PNBP
+      <p>Berdasarkan:</p>
+      <ol>
+        <li>Peraturan Pemerintah Nomor 36 Tahun 2024 Tentang Jenis dan Tarif Atas Jenis Penerimaan Negara Bukan Pajak Yang Berlaku Pada Kementerian Lingkungan Hidup Dan Kehutanan</li>
+        <li>Peraturan Menteri Kehutanan Nomor 2 Tahun 2025 Tentang Harga Patokan Hasil Hutan Kayu Dan Hasil Hutan Bukan Kayu Untuk Penghitungan Penerimaan Negara Bukan Pajak</li>
+      </ol>
     </div>
-
-    <div class="footer copyright">
-          <p style="text-align:center; margin-top: 30px; font-size: 12px; color: #666;">
-          &copy; 2025 BPHL 8 Surabaya | Kementerian Kehutanan
-    </p>
+    <div class="copyright">
+      &copy; 2025 BPHL 8 Surabaya | Kementerian Kehutanan
     </div>
+  </div>
+  <script>
+    // Data UPJL
+    var upjlData = {
+      "Pemanfaatan Jasa Aliran Air": {
+        "Perizinan Berusaha Pemanfaatan Hutan": ["per kwh", 0.02],
+        "Persetujuan Perhutanan Sosial": ["per kwh", 0.01]
+      },
+      "Pemanfaatan Air": {
+        "Perizinan Investasi Skala Mikro": ["per m3", 0.02],
+        "Perizinan Investasi Skala Kecil": ["per m3", 0.04],
+        "Perizinan Investasi Skala Menengah": ["per m3", 0.06],
+        "Perizinan Investasi Skala Besar": ["per m3", 0.08],
+        "Persetujuan Perhutanan Sosial": ["per m3", 0.01]
+      },
+      "Wisata Alam": {
+        "Perizinan Berusaha Pemanfaatan Hutan": ["per penghasilan bruto", 0.025],
+        "Persetujuan Perhutanan Sosial": ["per penghasilan bruto", 0.0125]
+      },
+      "Perlindungan Keanekaragaman Hayati": {
+        "Perizinan Berusaha Pemanfaatan Hutan/Hak Pengelolaan Hutan/Persetujuan Pemerintah": ["per penghasilan bruto", 0.025],
+        "Persetujuan Pemerintah pada Perhutanan Sosial": ["per penghasilan bruto", 0.0125]
+      },
+      "Penyelamatan Lingkungan": {
+        "Perizinan Berusaha Pemanfaatan Hutan/Hak Pengelolaan Hutan/Persetujuan Pemerintah": ["per penghasilan bruto", 0.025],
+        "Persetujuan Pemerintah pada Perhutanan Sosial": ["per penghasilan bruto", 0.0125]
+      },
+      "Transaksi Kegiatan Perdagangan Karbon": {
+        "Perizinan Berusaha Pemanfaatan Hutan/Hak Pengelolaan Hutan/Persetujuan Pemerintah": ["per transaksi", 0.10],
+        "Persetujuan Pemerintah pada Perhutanan Sosial": ["per transaksi", 0.05]
+      }
+    };
+    function populateUpjlDropdown() {
+      var select = document.getElementById("usaha");
+      select.innerHTML = "";
+      var defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = "Pilih Jenis Usaha";
+      defaultOption.disabled = true;
+      defaultOption.selected = true;
+      select.appendChild(defaultOption);
 
-</footer>
-    <script>
-        // Data UPJL
-        var upjlData = {
-            "Pemanfaatan Jasa Aliran Air": {
-                "Perizinan Berusaha Pemanfaatan Hutan": ["per kwh", 0.02],
-                "Persetujuan Perhutanan Sosial": ["per kwh", 0.01]
-            },
-            "Pemanfaatan Air": {
-                "Perizinan Investasi Skala Mikro": ["per m3", 0.02],
-                "Perizinan Investasi Skala Kecil": ["per m3", 0.04],
-                "Perizinan Investasi Skala Menengah": ["per m3", 0.06],
-                "Perizinan Investasi Skala Besar": ["per m3", 0.08],
-                "Persetujuan Perhutanan Sosial": ["per m3", 0.01]
-            },
-            "Wisata Alam": {
-                "Perizinan Berusaha Pemanfaatan Hutan": ["per penghasilan bruto", 0.025],
-                "Persetujuan Perhutanan Sosial": ["per penghasilan bruto", 0.0125]
-            },
-            "Perlindungan Keanekaragaman Hayati": {
-                "Perizinan Berusaha Pemanfaatan Hutan/Hak Pengelolaan Hutan/Persetujuan Pemerintah": ["per penghasilan bruto", 0.025],
-                "Persetujuan Pemerintah pada Perhutanan Sosial": ["per penghasilan bruto", 0.0125]
-            },
-            "Penyelamatan Lingkungan": {
-                "Perizinan Berusaha Pemanfaatan Hutan/Hak Pengelolaan Hutan/Persetujuan Pemerintah": ["per penghasilan bruto", 0.025],
-                "Persetujuan Pemerintah pada Perhutanan Sosial": ["per penghasilan bruto", 0.0125]
-            },
-            "Transaksi Kegiatan Perdagangan Karbon": {
-                "Perizinan Berusaha Pemanfaatan Hutan/Hak Pengelolaan Hutan/Persetujuan Pemerintah": ["per transaksi", 0.10],
-                "Persetujuan Pemerintah pada Perhutanan Sosial": ["per transaksi", 0.05]
-            }
-
-        };
-
-        function populateUpjlDropdown() {
-            var select = document.getElementById("usaha");
-            select.innerHTML = "";
-            var defaultOption = document.createElement("option");
-            defaultOption.value = "";
-            defaultOption.textContent = "Pilih Jenis Usaha";
-            defaultOption.disabled = true;
-            defaultOption.selected = true;
-            select.appendChild(defaultOption);
-
-            Object.keys(upjlData).forEach(function (key) {
-                var option = document.createElement("option");
-                option.value = key;
-                option.textContent = key;
-                select.appendChild(option);
-            });
-        }
-
-        function populateSubUsahaDropdown() {
-            var usaha = document.getElementById("usaha").value;
-            var subUsahaSelect = document.getElementById("subUsaha");
-            subUsahaSelect.innerHTML = "";
-
-            if (usaha) {
-                var data = upjlData[usaha];
-                Object.keys(data).forEach(function (key) {
-                    var option = document.createElement("option");
-                    option.value = key;
-                    option.textContent = key;
-                    subUsahaSelect.appendChild(option);
-                });
-            }
-            updateSatuan();
-        }
-
-        function updateSatuan() {
-            var usaha = document.getElementById("usaha").value;
-            var subUsaha = document.getElementById("subUsaha").value;
-            var data = upjlData[usaha] || {};
-            var satuan = "";
-            var harga = 0;
-
-            if (data[subUsaha]) {
-                satuan = data[subUsaha][0];
-                harga = data[subUsaha][1];
-            }
-
-            document.getElementById("satuan").value = satuan;
-            document.getElementById("harga").value = harga;
-        }
-
-       function formatHarga(input) {
-            var value = input.value.replace(/[^0-9]/g, ''); // Hapus non-digit
-            var formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Format ribuan
-            input.value = formattedValue;
-        }
-
-        function clearResults() {
-            document.getElementById("hasil").innerText = ""; // Menghapus hasil perhitungan
-            document.getElementById("usaha").value = ""; // Menghapus pilihan usaha
-            document.getElementById("subUsaha").value = ""; // Menghapus pilihan sub usaha
-            document.getElementById("satuan").value = ""; // Menghapus satuan
-            document.getElementById("hargaDasar").value = ""; // Menghapus harga dasar
-            document.getElementById("jumlah").value = ""; // Menghapus jumlah
-        }
-
-      function saveData() {
-            var usaha = document.getElementById("usaha").value;
-            var subUsaha = document.getElementById("subUsaha").value;
-            var satuan = document.getElementById("satuan").value;
-            var hargaDasar = parseFloat(document.getElementById("hargaDasar").value.replace(/[^0-9]/g, ''));
-            var jumlah = parseFloat(document.getElementById("jumlah").value);
-  
-            var tarif = hargaDasar * jumlah;
-
-            google.script.run.withSuccessHandler(function (response) {
-            document.getElementById("hasil").innerHTML = `
-            <div class="hasil-box">Total UPJL: Rp ${tarif.toLocaleString('id-ID')}</div>
-            `;
-            }).saveDataToSheet(usaha, subUsaha, satuan, hargaDasar, jumlah);
-        }
-
-        function calculateTotal() {
-            var hargaDasar = parseFloat(document.getElementById("hargaDasar").value.replace(/[^0-9]/g, ''));
-            var jumlah = parseFloat(document.getElementById("jumlah").value);
-            var satuan = document.getElementById("satuan").value;
-     
-            var subUsaha = document.getElementById("subUsaha").value;
-            var persentase = upjlData[document.getElementById("usaha").value][subUsaha][1];
-
-            var total = hargaDasar * jumlah * persentase;
-
-            document.getElementById("hasil").innerHTML = `Total UPJL: Rp ${total.toLocaleString('id-ID')}`;
-        }
-
-            document.addEventListener("DOMContentLoaded", function () {
-            populateUpjlDropdown();
+      Object.keys(upjlData).forEach(function (key) {
+        var option = document.createElement("option");
+        option.value = key;
+        option.textContent = key;
+        select.appendChild(option);
+      });
+    }
+    function populateSubUsahaDropdown() {
+      var usaha = document.getElementById("usaha").value;
+      var subUsahaSelect = document.getElementById("subUsaha");
+      subUsahaSelect.innerHTML = "";
+      if (usaha) {
+        var data = upjlData[usaha];
+        Object.keys(data).forEach(function (key) {
+          var option = document.createElement("option");
+          option.value = key;
+          option.textContent = key;
+          subUsahaSelect.appendChild(option);
         });
-    </script>
+      }
+      updateSatuan();
+    }
+    function updateSatuan() {
+      var usaha = document.getElementById("usaha").value;
+      var subUsaha = document.getElementById("subUsaha").value;
+      var data = upjlData[usaha] || {};
+      var satuan = "";
+      if (data[subUsaha]) satuan = data[subUsaha][0];
+      document.getElementById("satuan").value = satuan;
+    }
+    function formatHarga(input) {
+      var value = input.value.replace(/[^0-9]/g, '');
+      var formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      input.value = formattedValue;
+    }
+    function clearResults() {
+      document.getElementById("hasil").innerText = "Total UPJL: -";
+      document.getElementById("usaha").value = "";
+      document.getElementById("subUsaha").value = "";
+      document.getElementById("satuan").value = "";
+      document.getElementById("hargaDasar").value = "";
+      document.getElementById("jumlah").value = "";
+    }
+    function calculateTotal() {
+      var usaha = document.getElementById("usaha").value;
+      var subUsaha = document.getElementById("subUsaha").value;
+      var hargaDasar = parseFloat(document.getElementById("hargaDasar").value.replace(/[^0-9]/g, '')) || 0;
+      var jumlah = parseFloat(document.getElementById("jumlah").value) || 0;
+      if (!usaha || !subUsaha || !hargaDasar || !jumlah) {
+        document.getElementById("hasil").innerText = "Total UPJL: -";
+        return;
+      }
+      var persentase = upjlData[usaha][subUsaha][1];
+      var total = hargaDasar * jumlah * persentase;
+      document.getElementById("hasil").innerHTML = `Total UPJL: Rp ${total.toLocaleString('id-ID')}`;
+    }
+    document.addEventListener("DOMContentLoaded", populateUpjlDropdown);
+  </script>
 </body>
 </html>
