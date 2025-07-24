@@ -165,6 +165,15 @@
   margin-left: 18px;
   font-size: 1em;
 }
+.peraturan-list {
+  margin-left: 0;
+  padding-left: 22px;  /* ini biar angka sejajar dengan teks 'Berdasarkan:' */
+  font-size: 1em;
+}
+.peraturan-list li {
+  margin-bottom: 2px;
+  text-align: left;
+}
 
     .copyright {
       color: #888;
@@ -225,22 +234,18 @@
   <button type="button" style="background-color:#4d8533; color:white; padding:8px 16px; border:none; margin:5px; border-radius:5px; cursor:pointer;" onclick="clearResults()">Bersihkan Hasil</button>
 </div>
 
-        <div id="hasil">Total UPJL: -</div>
+        <div id="hasil">Total PNBP: -</div>
       </div>
     </form>
   <div class="footer">
   <p><strong>Disclaimer:</strong></p>
   <p>Total PNBP yang dihasilkan merupakan Hasil Simulasi Perhitungan PNBP</p>
-  <p><strong>Berdasarkan:</strong></p>
-  <ol>
-    <li>
-      Peraturan Pemerintah Nomor 36 Tahun 2024 Tentang Jenis dan Tarif Atas Jenis Penerimaan Negara Bukan Pajak Yang Berlaku Pada Kementerian Lingkungan Hidup Dan Kehutanan
-    </li>
-    <li>
-      Peraturan Menteri Kehutanan Nomor 2 Tahun 2025 Tentang Harga Patokan Hasil Hutan Kayu Dan Hasil Hutan Bukan Kayu Untuk Penghitungan Penerimaan Negara Bukan Pajak
-    </li>
-  </ol>
-</div>
+  <p style="font-weight: 600; margin-bottom: 2px;">Berdasarkan:</p>
+<ol class="peraturan-list">
+  <li>Peraturan Pemerintah Nomor 36 Tahun 2024 Tentang Jenis dan Tarif Atas Jenis Penerimaan Negara Bukan Pajak Yang Berlaku Pada Kementerian Lingkungan Hidup Dan Kehutanan</li>
+  <li>Peraturan Menteri Kehutanan Nomor 2 Tahun 2025 Tentang Harga Patokan Hasil Hutan Kayu Dan Hasil Hutan Bukan Kayu Untuk Penghitungan Penerimaan Negara Bukan Pajak</li>
+</ol>
+
 
     <div class="copyright">
       &copy; 2025 BPHL 8 Surabaya | Kementerian Kehutanan
