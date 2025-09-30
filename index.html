@@ -56,12 +56,23 @@
       opacity: .92;
       letter-spacing: 0.5px;
     }
+    .logo-kanan {
+      margin-left: auto; /* dorong logo kanan ke ujung kanan */
+      display: flex;
+      align-items: center;
+    }
+    
     .logo-kanan img {
-      height: 48px;
-      background: #fff;
-      border-radius: 12px;
-      padding: 5px 7px;
-      border: 1px solid #fff5;
+      height: 54px;   /* samakan tinggi dengan logo kiri */
+      border-radius: 0; /* hapus sudut bulat, biarkan asli/transparan */
+      background: none; /* transparan */
+      padding: 0;
+      border: none;
+    }
+    
+    .header-txt {
+      flex: 1;
+      text-align: center; /* teks rata tengah */
     }
     .form-section {
       padding: 30px 28px 15px 28px;
@@ -203,17 +214,17 @@
 <body>
   <div class="main-card">
     <div class="header">
-      <div class="logo-bulat">
-      <img src="KEMENHUT.png" alt="Logo Kemenhut" />
-      </div>
-      <div class="header-txt">
-        <div class="title">KALKULATOR UPJL</div>
-        <div class="sub">BPHL 8 SURABAYA</div>
-      </div>
-      <div class="logo-kanan">
+  <div class="logo-bulat">
+    <img src="KEMENHUT.png" alt="Logo Kemenhut" />
+  </div>
+  <div class="header-txt">
+    <div class="title">KALKULATOR UPJL</div>
+    <div class="sub">BPHL 8 SURABAYA</div>
+  </div>
+  <div class="logo-kanan">
     <img src="IFNS2030.png" alt="Logo IFNS 2030" />
   </div>
-    </div>
+</div>
     <form autocomplete="off" onsubmit="event.preventDefault();calculateTotal()">
       <div class="form-section">
 
