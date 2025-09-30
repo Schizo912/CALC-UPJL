@@ -25,21 +25,21 @@
       border: 1px solid #dde6da;
     }
     .header {
-      background: var(--hijau-kemenhut);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      padding: 18px 24px 15px 24px;
-      gap: 18px;
+      /* hapus styling lama yang tidak perlu */
+      background: none;
+      color: inherit;
+      display: block;
+      padding: 0;
       border-radius: 22px 22px 0 0;
       border-bottom: 4px solid var(--coklat-kemenhut);
+      overflow: hidden;                  /* agar sudut gambar ikut membulat */
     }
-    .header img {
-      height: 54px;
-      background: #fff;
-      border-radius: 18px;
-      padding: 5px 7px;
-      border: 1px solid #fff5;
+    
+    /* Opsi A: tinggi fleksibel ikut rasio gambar */
+    .header-img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
     .header-txt {
       flex: 1;
@@ -214,16 +214,9 @@
 <body>
   <div class="main-card">
     <div class="header">
-  <div class="logo-bulat">
-    <img src="KEMENHUT.png" alt="Logo Kemenhut" />
-  </div>
-  <div class="header-txt">
-    <div class="title">KALKULATOR UPJL</div>
-    <div class="sub">BPHL 8 SURABAYA</div>
-  </div>
-  <div class="logo-kanan">
-    <img src="IFNS2030.png" alt="Logo IFNS 2030" />
-  </div>
+  <img class="header-img" src="kalkulatorupjl.png" alt="Header Kalkulator UPJL">
+</div>
+
 </div>
     <form autocomplete="off" onsubmit="event.preventDefault();calculateTotal()">
       <div class="form-section">
