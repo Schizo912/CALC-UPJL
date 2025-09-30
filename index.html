@@ -214,10 +214,9 @@
 <body>
   <div class="main-card">
     <div class="header">
-  <img class="header-img" src="KALKULATORUPJL.png" alt="Header Kalkulator UPJL">
-</div>
+      <img class="header-img" src="KALKULATORUPJL.png" alt="Header Kalkulator UPJL">
+    </div>
 
-</div>
     <form autocomplete="off" onsubmit="event.preventDefault();calculateTotal()">
       <div class="form-section">
 
@@ -225,45 +224,48 @@
           <label for="usaha">Jenis Usaha:</label>
           <select id="usaha" onchange="populateSubUsahaDropdown()" required></select>
         </div>
+
         <div class="input-group">
           <label for="subUsaha">Pelaku Usaha:</label>
           <select id="subUsaha" onchange="updateSatuan()" required></select>
         </div>
+
         <div class="input-group">
           <label for="satuan">Satuan:</label>
           <input type="text" id="satuan" readonly />
         </div>
+
         <div class="input-group">
           <label for="hargaDasar">Tarif per Satuan (Rp):</label>
           <input type="text" id="hargaDasar" placeholder="Masukkan harga dasar/Bruto/Transaksi" oninput="formatHarga(this)" required />
         </div>
+
         <div class="input-group">
           <label for="jumlah">Volume:</label>
           <input type="number" id="jumlah" placeholder="Masukkan jumlah" min="1" required />
         </div>
 
         <div class="button-row">
-  <button type="submit" style="background-color:#4d8533; color:white; padding:8px 16px; border:none; margin:5px; border-radius:5px; cursor:pointer;">Hitung</button>
-  <button type="button" style="background-color:#4d8533; color:white; padding:8px 16px; border:none; margin:5px; border-radius:5px; cursor:pointer;" onclick="clearResults()">Bersihkan Hasil</button>
-</div>
+          <button type="submit" style="background-color:#4d8533; color:white; padding:8px 16px; border:none; margin:5px; border-radius:5px; cursor:pointer;">Hitung</button>
+          <button type="button" style="background-color:#4d8533; color:white; padding:8px 16px; border:none; margin:5px; border-radius:5px; cursor:pointer;" onclick="clearResults()">Bersihkan Hasil</button>
+        </div>
 
         <div id="hasil">Total PNBP: -</div>
       </div>
     </form>
-  <div class="footer">
-  <p><strong>Disclaimer:</strong></p>
-  <p>Total PNBP yang dihasilkan merupakan Hasil Simulasi Perhitungan PNBP</p>
-  <p style="font-weight: 600; margin-bottom: 2px;">Berdasarkan:</p>
-<ol class="peraturan-list">
-  <li>Peraturan Pemerintah Nomor 36 Tahun 2024 Tentang Jenis dan Tarif Atas Jenis Penerimaan Negara Bukan Pajak Yang Berlaku Pada Kementerian Lingkungan Hidup Dan Kehutanan</li>
-  <li>Peraturan Menteri Kehutanan Nomor 2 Tahun 2025 Tentang Harga Patokan Hasil Hutan Kayu Dan Hasil Hutan Bukan Kayu Untuk Penghitungan Penerimaan Negara Bukan Pajak</li>
-</ol>
 
-
-    <div class="copyright">
-      &copy; 2025 BPHL 8 Surabaya | Kementerian Kehutanan
+    <div class="footer">
+      <p><strong>Disclaimer:</strong></p>
+      <p>Total PNBP yang dihasilkan merupakan Hasil Simulasi Perhitungan PNBP</p>
+      <p style="font-weight: 600; margin-bottom: 2px;">Berdasarkan:</p>
+      <ol class="peraturan-list">
+        <li>Peraturan Pemerintah Nomor 36 Tahun 2024 Tentang Jenis dan Tarif Atas Jenis Penerimaan Negara Bukan Pajak Yang Berlaku Pada Kementerian Lingkungan Hidup Dan Kehutanan</li>
+        <li>Peraturan Menteri Kehutanan Nomor 2 Tahun 2025 Tentang Harga Patokan Hasil Hutan Kayu Dan Hasil Hutan Bukan Kayu Untuk Penghitungan Penerimaan Negara Bukan Pajak</li>
+      </ol>
     </div>
   </div>
+</body>
+
   <script>
     // Data UPJL
     var upjlData = {
